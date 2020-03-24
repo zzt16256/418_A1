@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Server {
     public static void main(String[] args) throws Exception {
 
-        Server server = new Server(8888);
+        ServerSocket server = new ServerSocket(8888);
         while (true) {
             // 2.接收客户端
             Socket socket = server.accept();
@@ -80,7 +80,6 @@ class MyReader extends Thread {
                         } else {
                             out.writeBytes("waiting");
                         }
-                    }
 
                     } else {
                         System.out.println(input);
@@ -97,18 +96,15 @@ class MyReader extends Thread {
                 }
             }
             this.socket.close();
-        }catch(
-
-    Exception e)
-    {
-        System.out.println("有人离线！");
-    }
+        } catch (Exception e) {
+            System.out.println("有人离线！");
+        }
     }
 
     private String GetKey(String line) {
-        String input = line.substring(11);
-
         try {
+            String input = line.substring(11);
+
             byte[] secretBytes = MessageDigest.getInstance("md5").digest(input.getBytes());
 
             // BigInteger bigint = new BigInteger(1, secretBytes);

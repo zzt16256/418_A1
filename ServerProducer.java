@@ -27,8 +27,8 @@ class Producer implements Runnable {
             int end = Math.min((i + 1) * length, content.length());
             String slice = content.substring(begin, end);
 
-            Thread worker = new Thread(new Worker(input, this.key, lock, result));
-            worker.start();
+            // Thread worker = new Thread(new Worker(input, this.key, lock, result));
+            // worker.start();
         }
     }
 
