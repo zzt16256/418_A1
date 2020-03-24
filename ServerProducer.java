@@ -19,7 +19,7 @@ class Producer implements Runnable {
     // @Override
     public void run() {
 
-        int length = 20;
+        int length = 10;
         int numDivided = content.length() / length;
         numDivided = (content.length() % length != 0) ? numDivided + 1 : numDivided;
         for (int i = 0; i < numDivided; i++) {
