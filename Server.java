@@ -61,9 +61,9 @@ class MyReader extends Thread {
                     String input = line.substring(11);
                     this.key = this.GetKey(input);
 
-                    out.writeBytes(this.key);
+                    out.writeBytes("key is (" + this.key + ")\n");
 
-                    Thread worker = new Thread(new Worker(input, this.key, lock, result));
+                    Thread worker = new Thread(new Producer(input, this.key, lock, result));
                     worker.start();
 
                 } else if (line.startsWith("StatusRequest ") == true) {
@@ -76,7 +76,7 @@ class MyReader extends Thread {
                         }
                         if (reply != '*') {
                             // handle
-                            out.writeChars(reply.toString());
+                            out.writeChars("high frequent character is (" + reply.toString() + ")\n");
                         } else {
                             out.writeBytes("waiting");
                         }

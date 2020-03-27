@@ -16,7 +16,7 @@ public class Client {
         Socket socket = new Socket("localhost", 8888);
         BufferedReader is = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         Scanner scan = new Scanner(System.in);
-        BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
         try {
             // 使用Socket 创建PrintWriter和BufferedReader进行读写数据
             // PrintWriter pw = new PrintWriter(socket.getOutputStream());
@@ -40,14 +40,17 @@ public class Client {
         // 可以一直的接收键盘的输入
         while (true) {
             String line = scan.nextLine();
-            out.write(line.getBytes());
+            out.writeBytes(line + "\n");
             out.flush();
 
             line = is.readLine();
-            System.out.println(line);
-            if (line == "good") {
+            if (line == null) {
                 break;
             }
+            System.out.println(line);
+            // if (line == "good") {
+            // break;
+            // }
         }
         out.close();
         // ps.close();
