@@ -24,7 +24,7 @@ class Producer implements Runnable {
     public void run() {
 
         int length = 10;
-        String input = this.content.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        String input = this.content;
         int numDivided = input.length() / length;
         numDivided = (input.length() % length != 0) ? numDivided + 1 : numDivided;
         for (int i = 0; i < numDivided; i++) {
@@ -32,8 +32,9 @@ class Producer implements Runnable {
             int end = Math.min((i + 1) * length, input.length());
             String slice = input.substring(begin, end);
 
-            Thread worker = new Thread(new Worker(i, slice, this.key, lock, wrokerResult));
-            worker.start();
+            // Thread worker = new Thread(new Worker(i, slice, this.key, lock,
+            // wrokerResult));
+            // worker.start();
         }
         synchronized (workerLock) {
             while (wrokerResult.size() != numDivided) {
